@@ -21,18 +21,21 @@
 # SOFTWARE.
 
 from notcallback import Promise
-from notcallback.promise import PromiseType
 from scrapy.http import Request
 
 
-def fetch(url, callback=None, errback=None, cls=Request, **kwargs) -> PromiseType:
+def fetch(url, *, callback=None, errback=None, cls=Request, base: Request = None, **kwargs) -> Promise:
     def make_request(resolve, reject):
-        yield cls(url, callback=resolve, errback=reject, **kwargs)
+        if base:
+            request = base.replace(url=url, callback=resolve, errback=reject, **kwargs)
+        else:
+            request = cls(url, callback=resolve, errback=reject, **kwargs)
+        yield request
 
-    request = Promise(make_request)
+    promise = Promise(make_request)
     if callback:
-        request = request.then(callback)
+        promise = promise.then(callback)
     if errback:
-        request = request.catch(errback)
+        promise = promise.catch(errback)
 
-    return request
+    return promise
