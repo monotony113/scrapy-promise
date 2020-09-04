@@ -47,6 +47,6 @@ setup(
     keywords='promise scrapy',
     python_requires='>=3.6',
     install_requires=[
-        'notcallback>=0.0.5',
+        'notcallback>=0.0.6',
     ],
 )
