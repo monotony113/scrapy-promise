@@ -30,6 +30,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/monotony113/scrapy-promise',
     author='Tony Wu',
+    author_email='tony(dot)wu(at)nyu(dot)edu@inval.id',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -47,6 +48,6 @@ setup(
     keywords='promise scrapy',
     python_requires='>=3.6',
     install_requires=[
-        'notcallback>=0.0.7',
+        'notcallback>=0.0.8',
     ],
 )
